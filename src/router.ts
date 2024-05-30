@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 // components
-import HomeView from './pages/HomeView.vue'
+import HomeView from '@/views/HomeView.vue'
 // utils
 // import store from './store';
 

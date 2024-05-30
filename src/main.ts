@@ -4,8 +4,8 @@ import { createPinia } from 'pinia'
 import router from './router'
 // components
 import App from './App.vue'
-import BaseButton from './components/ui/BaseButton.vue'
-import BaseCard from './components/ui/BaseCard.vue'
+import BaseButton from '@/components/shared/BaseButton.vue'
+import BaseCard from '@/components/shared/BaseCard.vue'
 
 const app = createApp(App)
 
