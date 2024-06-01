@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="header">
     <h2 class="header-title">
       <router-link to="/">Medicolio</router-link>
     </h2>
@@ -14,12 +14,20 @@
 <script setup lang="ts"></script>
 
 <style lang="sass" scoped>
-header
+.header
   display: flex
-  justify-content: space-between
+  flex-wrap: wrap
+  justify-content: center
   align-items: center
-  padding: 1.5rem
+  padding: 1rem
+  gap: 1rem
   border-bottom: 0.2rem solid $base-color-4
+
+  @media screen and (min-width: $breakpoint-md)
+    flex-wrap: nowrap
+    justify-content: space-between
+    gap: 0
+
 
 .header-title
   font-size: 2rem
