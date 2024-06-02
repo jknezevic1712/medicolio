@@ -1,29 +1,25 @@
 <template>
   <section>
-    <base-card>
-      <div class="container">
-        <h1>Your profile</h1>
+    <base-card title="Your profile">
+      <!-- <base-form :data="formData" :submitFn="handleFormSubmit" :resetFn="handleFormReset" /> -->
+      <div class="form-container">
+        <form id="doctor-profile-form" class="form" @submit.prevent="handleFormSubmit">
+          <!-- <base-form-control :key="idx" v-for="(item, idx) in data" :item="item" /> -->
+          <span :key="idx" v-for="(control, idx) in formData" class="form-control">
+            <label :for="control.label">{{ control.label }}:</label>
+            <input
+              :id="control.label"
+              type="text"
+              :disabled="control.disabled"
+              :required="control.required"
+              v-model="control.input.value"
+            />
+          </span>
+        </form>
 
-        <!-- <base-form :data="formData" :submitFn="handleFormSubmit" :resetFn="handleFormReset" /> -->
-        <div class="form-container">
-          <form id="doctor-profile-form" class="form" @submit.prevent="handleFormSubmit">
-            <!-- <base-form-control :key="idx" v-for="(item, idx) in data" :item="item" /> -->
-            <span :key="idx" v-for="(control, idx) in formData" class="form-control">
-              <label :for="control.label">{{ control.label }}:</label>
-              <input
-                :id="control.label"
-                type="text"
-                :disabled="control.disabled"
-                :required="control.required"
-                v-model="control.input.value"
-              />
-            </span>
-          </form>
-
-          <div class="form-actions">
-            <base-button type="reset" @click="handleFormReset">Reset</base-button>
-            <base-button type="submit" form="doctor-profile-form">Submit</base-button>
-          </div>
+        <div class="form-actions">
+          <base-button type="reset" @click="handleFormReset">Reset</base-button>
+          <base-button type="submit" form="doctor-profile-form">Submit</base-button>
         </div>
       </div>
     </base-card>
@@ -81,20 +77,6 @@ function handleFormSubmit() {
 </script>
 
 <style lang="sass" scoped>
-.container
-  display: flex
-  justify-content: center
-  align-items: center
-  flex-direction: column
-  gap: 1.5rem
-.container > h1
-  width: 100%
-  display: flex
-  justify-content: center
-  @media screen and (min-width: $breakpoint-md)
-    justify-content: flex-start
-
-
 .form-container
   width: 100%
   display: flex

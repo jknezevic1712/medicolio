@@ -1,11 +1,7 @@
 <template>
   <section>
-    <base-card>
-      <div class="container">
-        <h1>Your patients</h1>
-
-        <patients-list />
-      </div>
+    <base-card title="Your patients">
+      <patients-list />
     </base-card>
   </section>
 </template>
@@ -30,20 +26,4 @@ onBeforeMount(async () => {
 })
 </script>
 
-<style lang="sass" scoped>
-.container
-  display: flex
-  justify-content: center
-  align-items: center
-  flex-direction: column
-  gap: 1.5rem
-
-.container > h1
-  width: 100%
-  display: flex
-  justify-content: center
-
-@media screen and (min-width: $breakpoint-md)
-  .container > h1
-    justify-content: flex-start
-</style>
+<style lang="sass" scoped></style>
