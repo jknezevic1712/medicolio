@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <h2 class="header-title">
-      <router-link to="/">Medicolio</router-link>
+      <router-link to="/">Medicolio<library-title /></router-link>
     </h2>
     <nav class="nav">
       <base-button to="/">Patients</base-button>
@@ -11,7 +11,9 @@
   </header>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import LibraryTitle from './LibraryTitle.vue'
+</script>
 
 <style lang="sass" scoped>
 .header
