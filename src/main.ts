@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 // utils
 import router from './router'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 // components
 import App from './App.vue'
 import BaseButton from '@/components/shared/BaseButton.vue'
@@ -11,8 +12,10 @@ import BaseForm from '@/components/shared/BaseForm.vue'
 import BaseFormControl from '@/components/shared/BaseFormControl.vue'
 
 const app = createApp(App)
+const store = createPinia()
+store.use(piniaPluginPersistedstate)
 
-app.use(createPinia())
+app.use(store)
 app.use(router)
 
 app.component('base-button', BaseButton)
