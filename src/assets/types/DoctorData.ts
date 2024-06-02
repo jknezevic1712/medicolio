@@ -15,6 +15,7 @@ export type Patient = {
 export type Doctor = {
   id: number
   name: string
+  PIN: string
   title: string
   patients: Patient[]
 }

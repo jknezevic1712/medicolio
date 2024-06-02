@@ -3,6 +3,7 @@ export default {
     {
       id: 1,
       name: 'Joe Frazier',
+      PIN: '10232232032',
       title: 'MD',
       patients: [
         {
@@ -32,7 +33,7 @@ export default {
         {
           id: 2,
           name: 'Lolek Randolph',
-          PIN: '202302322232',
+          PIN: '20230232223',
           diagnosis:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec mauris porttitor, efficitur ipsum vitae, ultricies nulla. Vestibulum in tempus risus, sit amet sodales ligula. Proin nec dui at est luctus ullamcorper. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce tincidunt, enim id ultrices viverra, turpis lectus tincidunt neque, nec gravida augue lorem eget justo.',
           prescribtions: [
@@ -58,6 +59,7 @@ export default {
     {
       id: 2,
       name: 'Iron Mike',
+      PIN: '10232232634',
       title: 'MD',
       patients: [
         {
@@ -113,6 +115,7 @@ export default {
     {
       id: 1,
       name: 'Stephen King',
+      PIN: '16632232032',
       title: 'MD',
       patients: [
         {
