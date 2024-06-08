@@ -13,7 +13,7 @@
           </span>
 
           <div class="form-actions">
-            <base-button type="submit">Submit</base-button>
+            <base-button type="submit">{{ submitBtnTooltip }}</base-button>
           </div>
         </form>
 
@@ -35,6 +35,8 @@ const authData = reactive({
 const authModeInfo = computed(() =>
   authData.isLoginMode ? "Don't have an account yet?" : 'Already have an account?'
 )
+
+const submitBtnTooltip = computed(() => (authData.isLoginMode ? 'Login' : 'Register'))
 
 function handleAuthModeChange() {
   authData.isLoginMode = !authData.isLoginMode
