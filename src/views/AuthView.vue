@@ -1,34 +1,9 @@
-<template>
-  <section>
-    <base-card title="Authentication">
-      <div class="form-container">
-        <form id="auth-form" class="form" @submit.prevent="handleFormSubmit">
-          <span class="form-control">
-            <label for="username">Username:</label>
-            <input id="username" type="text" required v-model="authData.username" />
-          </span>
-          <span class="form-control">
-            <label for="password">Password:</label>
-            <input id="password" type="text" required v-model="authData.password" />
-          </span>
-
-          <div class="form-actions">
-            <base-button type="submit">{{ submitBtnTooltip }}</base-button>
-          </div>
-        </form>
-
-        <p class="form-auth_mode" @click="handleAuthModeChange">{{ authModeInfo }}</p>
-      </div>
-    </base-card>
-  </section>
-</template>
-
 <script setup lang="ts">
 import { computed, reactive } from 'vue'
 // utils
 import { useAuthStore } from '@/stores/useAuthStore'
 
-const { setUser } = useAuthStore()
+const authStore = useAuthStore()
 
 const authData = reactive({
   username: '',
@@ -45,7 +20,7 @@ function handleAuthModeChange() {
   authData.isLoginMode = !authData.isLoginMode
 }
 function handleFormSubmit() {
-  // TODO: Different actions for login/register
+  // TODO: Different data for login/register
   const formData = {
     id: Date.now(),
     name: authData.username,
@@ -54,9 +29,46 @@ function handleFormSubmit() {
     patients: []
   }
 
-  setUser(formData)
+  authStore.authUser(formData, authData.isLoginMode)
 }
 </script>
+
+<template>
+  <section>
+    <base-card title="Authentication">
+      <div class="form-container">
+        <form id="auth-form" class="form" @submit.prevent="handleFormSubmit">
+          <span class="form-control">
+            <label for="username">Username:</label>
+            <input
+              id="username"
+              type="text"
+              autocomplete="username"
+              required
+              v-model="authData.username"
+            />
+          </span>
+          <span class="form-control">
+            <label for="password">Password:</label>
+            <input
+              id="password"
+              type="password"
+              autocomplete="current-password"
+              required
+              v-model="authData.password"
+            />
+          </span>
+
+          <div class="form-actions">
+            <base-button type="submit">{{ submitBtnTooltip }}</base-button>
+          </div>
+        </form>
+
+        <p class="form-auth_mode" @click="handleAuthModeChange">{{ authModeInfo }}</p>
+      </div>
+    </base-card>
+  </section>
+</template>
 
 <style lang="sass" scoped>
 .form-container
