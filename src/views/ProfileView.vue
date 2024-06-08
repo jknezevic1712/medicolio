@@ -3,7 +3,7 @@
     <base-card title="Your profile">
       <!-- <base-form :data="formData" :submitFn="handleFormSubmit" :resetFn="handleFormReset" /> -->
       <div class="form-container">
-        <form id="doctor-profile-form" class="form" @submit.prevent="handleFormSubmit">
+        <form id="profile-form" class="form" @submit.prevent="handleFormSubmit">
           <!-- <base-form-control :key="idx" v-for="(item, idx) in data" :item="item" /> -->
           <span :key="idx" v-for="(control, idx) in formData" class="form-control">
             <label :for="control.label">{{ control.label }}:</label>
@@ -30,31 +30,31 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 // utils
-import { useDoctorStore } from '@/stores/useDoctorStore'
+import { useAuthStore } from '@/stores/useAuthStore'
 // types
 import type { FormDataProps } from '@/assets/types/General'
 
-const doctorStore = useDoctorStore()
-const doctorPin = ref(doctorStore.doctor!.PIN)
-const doctorName = ref(doctorStore.doctor!.name)
-const doctorTitle = ref(doctorStore.doctor!.title)
+const authStore = useAuthStore()
+const userPin = ref(authStore.user!.PIN)
+const userName = ref(authStore.user!.name)
+const userTitle = ref(authStore.user!.title)
 
 const formData: FormDataProps[] = [
   {
-    input: doctorPin,
-    emitName: 'doctor-pin',
+    input: userPin,
+    emitName: 'user-pin',
     label: 'PIN',
     disabled: true
   },
   {
-    input: doctorName,
-    emitName: 'doctor-name',
+    input: userName,
+    emitName: 'user-name',
     label: 'Name',
     required: true
   },
   {
-    input: doctorTitle,
-    emitName: 'doctor-title',
+    input: userTitle,
+    emitName: 'user-title',
     label: 'Title',
     required: true
   }

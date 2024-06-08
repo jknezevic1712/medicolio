@@ -1,6 +1,6 @@
 <template>
-  <section class="list" v-if="doctorStore.doctor">
-    <list-item :key="patient.PIN" v-for="patient in doctorStore.patientsList">
+  <section class="list" v-if="authStore.user">
+    <list-item :key="patient.PIN" v-for="patient in authStore.patientsList">
       <p>{{ patient.name }}</p>
       <p>{{ patient.PIN }}</p>
     </list-item>
@@ -11,9 +11,9 @@
 // components
 import ListItem from './ListItem.vue'
 // utils
-import { useDoctorStore } from '@/stores/useDoctorStore'
+import { useAuthStore } from '@/stores/useAuthStore'
 
-const doctorStore = useDoctorStore()
+const authStore = useAuthStore()
 </script>
 
 <style lang="sass" scoped>

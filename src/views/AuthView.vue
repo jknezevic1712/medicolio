@@ -25,6 +25,10 @@
 
 <script setup lang="ts">
 import { computed, reactive } from 'vue'
+// utils
+import { useAuthStore } from '@/stores/useAuthStore'
+
+const { setUser } = useAuthStore()
 
 const authData = reactive({
   username: '',
@@ -35,15 +39,22 @@ const authData = reactive({
 const authModeInfo = computed(() =>
   authData.isLoginMode ? "Don't have an account yet?" : 'Already have an account?'
 )
-
 const submitBtnTooltip = computed(() => (authData.isLoginMode ? 'Login' : 'Register'))
 
 function handleAuthModeChange() {
   authData.isLoginMode = !authData.isLoginMode
 }
-
 function handleFormSubmit() {
-  return
+  // TODO: Different actions for login/register
+  const formData = {
+    id: Date.now(),
+    name: authData.username,
+    PIN: '20230696032',
+    title: 'MD',
+    patients: []
+  }
+
+  setUser(formData)
 }
 </script>
 
