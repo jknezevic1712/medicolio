@@ -31,7 +31,7 @@ export const useDrugStore = defineStore(
   {
     persist: {
       storage: localStorage,
-      key: 'medicolio_vue-drugs'
+      key: 'medicolio-drugs'
     }
   }
 )
