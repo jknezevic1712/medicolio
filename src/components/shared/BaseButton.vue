@@ -5,26 +5,29 @@ const props = withDefaults(
   defineProps<{
     to?: string
     color?: 'primary' | 'destructive'
+    disabled?: boolean
   }>(),
   {
-    color: 'primary'
+    color: 'primary',
+    disabled: false
   }
 )
 
-const btnColor = computed(() => ({
+const btnClasses = computed(() => ({
   primary: props.color === 'primary',
-  destructive: props.color === 'destructive'
+  destructive: props.color === 'destructive',
+  disabled: props.disabled
 }))
 </script>
 
 <template>
   <router-link v-if="props.to" :to="props.to">
-    <button class="base" :class="btnColor">
+    <button class="base" :class="btnClasses">
       <slot />
     </button>
   </router-link>
 
-  <button v-else class="base" :class="btnColor">
+  <button v-else class="base" :class="btnClasses">
     <slot />
   </button>
 </template>
@@ -45,14 +48,23 @@ const btnColor = computed(() => ({
   background-color: $base-color-3
 
   &:hover
-    background-color: $base-color-2
     color: $base-color-4
+    background-color: $base-color-2
 
 .destructive
     color: $base-color-1
     background-color: $base-color-destructive
 
     &:hover
-      background-color: $base-color-destructive-2
       color: $base-color-1
+      background-color: $base-color-destructive-2
+
+.disabled
+  color: $base-color-1
+  background-color: $base-color-4-dimmed
+  cursor: not-allowed
+
+  &:hover
+    color: $base-color-1
+    background-color: $base-color-4-dimmed
 </style>

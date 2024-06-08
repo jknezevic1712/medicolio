@@ -1,14 +1,20 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 // utils
 import useAuthStore from '@/stores/useAuthStore'
-// types
 import type { FormDataProps } from '@/assets/types/General'
 
 const authStore = useAuthStore()
+
 const userPin = ref(authStore.user!.PIN)
 const userName = ref(authStore.user!.name)
 const userTitle = ref(authStore.user!.title)
+
+const isFormDirty = computed(() => {
+  if (userName.value !== authStore.user!.name || userTitle.value !== authStore.user!.title)
+    return true
+  return false
+})
 
 const formData: FormDataProps[] = [
   {
@@ -32,7 +38,10 @@ const formData: FormDataProps[] = [
 ]
 
 function handleFormReset() {
-  return
+  // TODO: think of something else, maybe api request that sends initial data?
+  // form.PIN = authStore.user!.PIN
+  // form.name = authStore.user!.name
+  // form.title = authStore.user!.title
 }
 
 function handleFormSubmit() {
@@ -55,11 +64,17 @@ function handleFormSubmit() {
               v-model="control.input.value"
             />
           </span>
+
           <div class="form-actions">
-            <base-button type="reset" @click="handleFormReset" color="destructive"
-              >Reset</base-button
+            <!-- <base-button
+              type="reset"
+              @click="handleFormReset"
+              color="destructive"
+              :disabled="!isFormDirty"
             >
-            <base-button type="submit">Submit</base-button>
+              Reset
+            </base-button> -->
+            <base-button type="submit" :disabled="!isFormDirty">Save</base-button>
           </div>
         </form>
       </div>
