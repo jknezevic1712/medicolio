@@ -18,6 +18,6 @@
   cursor: pointer
 
   &:hover
-    box-shadow: 0 2px 8px $base-color-4-rgba
+    box-shadow: 0 2px 8px $base-color-4-dimmed
     border: 1px solid $base-color-2
 </style>

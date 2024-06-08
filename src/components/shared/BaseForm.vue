@@ -59,5 +59,5 @@ function handleChange(e: any) {
   padding: 0.25rem
 
 .form > .form-control > input:disabled
-  background-color: $base-color-4-rgba
+  background-color: $base-color-4-dimmed
 </style>

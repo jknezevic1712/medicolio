@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 // components
 import HomeView from '@/views/HomeView.vue'
 import ProfileView from './views/ProfileView.vue'
+import AuthView from './views/AuthView.vue'
 // utils
 // import store from './store';
 
@@ -13,10 +14,10 @@ const router = createRouter({
       path: '/',
       component: HomeView
     },
-    // {
-    //   path: '/auth',
-    //   component: AuthView
-    // },
+    {
+      path: '/auth',
+      component: AuthView
+    },
     {
       path: '/doctor/:id',
       component: ProfileView,

@@ -15,12 +15,13 @@
               v-model="control.input.value"
             />
           </span>
+          <div class="form-actions">
+            <base-button type="reset" @click="handleFormReset" color="destructive"
+              >Reset</base-button
+            >
+            <base-button type="submit">Submit</base-button>
+          </div>
         </form>
-
-        <div class="form-actions">
-          <base-button type="reset" @click="handleFormReset">Reset</base-button>
-          <base-button type="submit" form="doctor-profile-form">Submit</base-button>
-        </div>
       </div>
     </base-card>
   </section>
@@ -88,25 +89,28 @@ function handleFormSubmit() {
   display: flex
   flex-direction: column
   align-items: center
+
   @media screen and (min-width: $breakpoint-md)
     max-width: 30rem
 .form > .form-control
   width: 100%
   display: flex
-  justify-content: space-between
-  align-items: center
-  gap: 2rem
-  padding: 1rem
+  flex-direction: column
+  justify-content: center
+  gap: 0.25rem
+  padding: 0.5rem 0
+
   input
     border: 2px solid $base-color-3
     border-radius: 0.25rem
     outline: 2px solid transparent
     padding: 0.25rem
     transition: all 150ms ease-out
+
   input:hover
     border-color: $base-color-2
   input:disabled
-    background-color: $base-color-4-rgba
+    background-color: $base-color-4-dimmed
   input:focus, textarea:focus
     outline: 2px solid $base-color-2
     border-color: $base-color-2
@@ -116,10 +120,23 @@ function handleFormSubmit() {
     border: none
   input[type='checkbox']:focus
     outline: $base-color-2 solid 1px
+
+  @media screen and (min-width: $breakpoint-md)
+    flex-direction: row
+    justify-content: space-between
+    align-items: center
 .form-actions
   width: 100%
   display: flex
-  justify-content: flex-end
-  align-items: center
+  flex-wrap: wrap
   gap: 0.5rem
+  justify-content: center
+  align-items: center
+  margin-top: 2rem
+
+  button
+    width: 100%
+
+  @media screen and (min-width: $breakpoint-md)
+    margin-top: 1rem
 </style>
