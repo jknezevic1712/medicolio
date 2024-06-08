@@ -4,18 +4,18 @@ import { RouterView } from 'vue-router'
 // components
 import TheHeader from '@/components/header/TheHeader.vue'
 // utils
-import { useDrugStore } from '@/stores/useDrugStore'
-import { useAuthStore } from '@/stores/useAuthStore'
+import useDrugStore from '@/stores/useDrugStore'
+import useAuthStore from '@/stores/useAuthStore'
 import { fetchMedications } from '@/api'
 
-const { setDrugs } = useDrugStore()
-const { autoLoginUser } = useAuthStore()
+const drugStore = useDrugStore()
+const authStore = useAuthStore()
 
 onBeforeMount(async () => {
   const res = await fetchMedications()
-  setDrugs(res)
+  drugStore.setDrugs(res)
 
-  autoLoginUser()
+  authStore.autoLoginUser()
 })
 </script>
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 // utils
-import { useAuthStore } from '@/stores/useAuthStore'
+import useAuthStore from '@/stores/useAuthStore'
 // types
 import type { FormDataProps } from '@/assets/types/General'
 

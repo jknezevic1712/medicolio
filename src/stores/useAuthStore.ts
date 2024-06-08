@@ -7,7 +7,7 @@ import type { Doctor, Patient } from '@/assets/types/DoctorData'
 
 let timer: undefined | NodeJS.Timeout
 
-export const useAuthStore = defineStore(
+const useAuthStore = defineStore(
   'auth',
   () => {
     const router = useRouter()
@@ -23,7 +23,7 @@ export const useAuthStore = defineStore(
 
     function authUser(data: Doctor, isLogin: boolean) {
       // TODO: actions for login/register
-      const expiresIn = 2600000
+      const expiresIn = 2600 * 1000
       const expirationDate = new Date().getTime() + expiresIn * 1000
 
       timer = setTimeout(() => {
@@ -43,13 +43,14 @@ export const useAuthStore = defineStore(
       if (!userData || !tokenExpiration) return
 
       const expiresIn = +tokenExpiration - new Date().getTime()
-      if (expiresIn < 10000) {
+      const expiresInSec = Math.floor(expiresIn / 1000)
+      if (expiresInSec < 10000) {
         return
       }
 
       timer = setTimeout(() => {
         logoutUser()
-      }, expiresIn)
+      }, expiresInSec)
 
       authUser(JSON.parse(userData), true)
     }
@@ -73,3 +74,5 @@ export const useAuthStore = defineStore(
     }
   }
 )
+
+export default useAuthStore

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, reactive } from 'vue'
 // utils
-import { useAuthStore } from '@/stores/useAuthStore'
+import useAuthStore from '@/stores/useAuthStore'
 
 const authStore = useAuthStore()
 

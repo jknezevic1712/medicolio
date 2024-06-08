@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 // types
 import type { Drug, DrugData } from '@/assets/types/API'
 
-export const useDrugStore = defineStore(
+const useDrugStore = defineStore(
   'drugs',
   () => {
     const drugs = ref<DrugData[]>([])
@@ -35,3 +35,5 @@ export const useDrugStore = defineStore(
     }
   }
 )
+
+export default useDrugStore

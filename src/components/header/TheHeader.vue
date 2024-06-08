@@ -1,5 +1,17 @@
 <script setup lang="ts">
+// components
+import { computed } from 'vue'
 import LibraryTitle from './LibraryTitle.vue'
+// utils
+import useAuthStore from '@/stores/useAuthStore'
+
+const authStore = useAuthStore()
+
+const userExists = computed(() => !!authStore.user)
+
+function handleLogout() {
+  authStore.logoutUser()
+}
 </script>
 
 <template>
@@ -8,9 +20,13 @@ import LibraryTitle from './LibraryTitle.vue'
       <router-link to="/">Medicolio<library-title /></router-link>
     </h2>
     <nav class="nav">
-      <base-button to="/">Patients</base-button>
-      <base-button to="/doctor/1">Profile</base-button>
-      <base-button to="/auth">Register</base-button>
+      <template v-if="userExists">
+        <base-button to="/">Patients</base-button>
+        <base-button to="/doctor/1">Profile</base-button>
+        <base-button color="destructive" @click="handleLogout">Logout</base-button>
+      </template>
+
+      <base-button v-else to="/auth">Register</base-button>
     </nav>
   </header>
 </template>

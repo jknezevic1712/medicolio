@@ -5,14 +5,17 @@ import HomeView from '@/views/HomeView.vue'
 import ProfileView from './views/ProfileView.vue'
 import AuthView from './views/AuthView.vue'
 // utils
-// import store from './store';
+import useAuthStore from './stores/useAuthStore'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      component: HomeView
+      component: HomeView,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/auth',
@@ -56,9 +59,13 @@ const router = createRouter({
 })
 
 router.beforeEach((to, _from, next) => {
-  // const isLoggedIn = store.getters["auth/isLoggedIn"];
+  const authStore = useAuthStore()
 
-  // if (to.meta.requiresAuth && !isLoggedIn) next('/auth')
+  if (to.meta.requiresAuth && !authStore.user) {
+    return next('/auth')
+  } else if (to.path === '/auth' && authStore.user) {
+    return
+  }
   next()
 })
 

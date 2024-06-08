@@ -2,7 +2,7 @@
 // components
 import ListItem from './ListItem.vue'
 // utils
-import { useAuthStore } from '@/stores/useAuthStore'
+import useAuthStore from '@/stores/useAuthStore'
 
 const authStore = useAuthStore()
 </script>
