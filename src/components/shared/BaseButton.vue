@@ -1,15 +1,3 @@
-<template>
-  <router-link v-if="props.to" :to="props.to">
-    <button class="base" :class="btnColor">
-      <slot />
-    </button>
-  </router-link>
-
-  <button v-else class="base" :class="btnColor">
-    <slot />
-  </button>
-</template>
-
 <script setup lang="ts">
 import { computed } from 'vue'
 
@@ -28,6 +16,18 @@ const btnColor = computed(() => ({
   destructive: props.color === 'destructive'
 }))
 </script>
+
+<template>
+  <router-link v-if="props.to" :to="props.to">
+    <button class="base" :class="btnColor">
+      <slot />
+    </button>
+  </router-link>
+
+  <button v-else class="base" :class="btnColor">
+    <slot />
+  </button>
+</template>
 
 <style lang="sass" scoped>
 .base

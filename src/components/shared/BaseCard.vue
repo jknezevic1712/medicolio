@@ -1,15 +1,15 @@
+<script setup lang="ts">
+const props = defineProps<{
+  title?: string
+}>()
+</script>
+
 <template>
   <div class="card">
     <h1 v-if="props.title">{{ props.title }}</h1>
     <slot></slot>
   </div>
 </template>
-
-<script setup lang="ts">
-const props = defineProps<{
-  title?: string
-}>()
-</script>
 
 <style lang="sass" scoped>
 .card

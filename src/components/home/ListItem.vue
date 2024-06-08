@@ -1,10 +1,10 @@
+<script setup lang="ts"></script>
+
 <template>
   <div class="list_item">
     <slot />
   </div>
 </template>
-
-<script setup lang="ts"></script>
 
 <style lang="sass" scoped>
 .list_item

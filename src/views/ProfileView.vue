@@ -1,32 +1,3 @@
-<template>
-  <section>
-    <base-card title="Your profile">
-      <!-- <base-form :data="formData" :submitFn="handleFormSubmit" :resetFn="handleFormReset" /> -->
-      <div class="form-container">
-        <form id="profile-form" class="form" @submit.prevent="handleFormSubmit">
-          <!-- <base-form-control :key="idx" v-for="(item, idx) in data" :item="item" /> -->
-          <span :key="idx" v-for="(control, idx) in formData" class="form-control">
-            <label :for="control.label">{{ control.label }}:</label>
-            <input
-              :id="control.label"
-              type="text"
-              :disabled="control.disabled"
-              :required="control.required"
-              v-model="control.input.value"
-            />
-          </span>
-          <div class="form-actions">
-            <base-button type="reset" @click="handleFormReset" color="destructive"
-              >Reset</base-button
-            >
-            <base-button type="submit">Submit</base-button>
-          </div>
-        </form>
-      </div>
-    </base-card>
-  </section>
-</template>
-
 <script setup lang="ts">
 import { ref } from 'vue'
 // utils
@@ -67,15 +38,36 @@ function handleFormReset() {
 function handleFormSubmit() {
   return
 }
-
-// import { onBeforeMount } from 'vue'
-// ? Some fetching might be need to be done to fetch doctor's extra data
-// onBeforeMount(async () => {
-//   const res = await fetchMedications()
-//   setDrugs(res)
-//   setDoctor(DUMMY_DATA.doctors[0])
-// })
 </script>
+
+<template>
+  <section>
+    <base-card title="Your profile">
+      <!-- <base-form :data="formData" :submitFn="handleFormSubmit" :resetFn="handleFormReset" /> -->
+      <div class="form-container">
+        <form id="profile-form" class="form" @submit.prevent="handleFormSubmit">
+          <!-- <base-form-control :key="idx" v-for="(item, idx) in data" :item="item" /> -->
+          <span :key="idx" v-for="(control, idx) in formData" class="form-control">
+            <label :for="control.label">{{ control.label }}:</label>
+            <input
+              :id="control.label"
+              type="text"
+              :disabled="control.disabled"
+              :required="control.required"
+              v-model="control.input.value"
+            />
+          </span>
+          <div class="form-actions">
+            <base-button type="reset" @click="handleFormReset" color="destructive"
+              >Reset</base-button
+            >
+            <base-button type="submit">Submit</base-button>
+          </div>
+        </form>
+      </div>
+    </base-card>
+  </section>
+</template>
 
 <style lang="sass" scoped>
 .form-container

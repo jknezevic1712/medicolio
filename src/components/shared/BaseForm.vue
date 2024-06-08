@@ -1,3 +1,22 @@
+<script setup lang="ts">
+// types
+import type { FormDataProps } from '@/assets/types/General'
+
+const props = defineProps<{
+  data: FormDataProps[]
+  submitFn: () => void
+  resetFn?: () => void
+}>()
+
+const emit = defineEmits<{
+  (e: string, value: any): void
+}>()
+
+function handleChange(e: any) {
+  console.log('E ', e.target.value)
+}
+</script>
+
 <template>
   <form id="base-form" class="form">
     <!-- <base-form-control :key="idx" v-for="(item, idx) in data" :item="item" /> -->
@@ -18,25 +37,6 @@
     <button type="reset" v-if="resetFn" @click="resetFn">Reset</button>
   </div>
 </template>
-
-<script setup lang="ts">
-// types
-import type { FormDataProps } from '@/assets/types/General'
-
-const props = defineProps<{
-  data: FormDataProps[]
-  submitFn: () => void
-  resetFn?: () => void
-}>()
-
-const emit = defineEmits<{
-  (e: string, value: any): void
-}>()
-
-function handleChange(e: any) {
-  console.log('E ', e.target.value)
-}
-</script>
 
 <style lang="sass" scoped>
 .form

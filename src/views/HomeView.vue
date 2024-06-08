@@ -1,3 +1,8 @@
+<script setup lang="ts">
+// components
+import PatientsList from '@/components/home/PatientsList.vue'
+</script>
+
 <template>
   <section>
     <base-card title="Your patients">
@@ -7,11 +12,6 @@
     </base-card>
   </section>
 </template>
-
-<script setup lang="ts">
-// components
-import PatientsList from '@/components/home/PatientsList.vue'
-</script>
 
 <style lang="sass" scoped>
 .patients-list-container
