@@ -1,7 +1,22 @@
 <script setup lang="ts">
+import { onBeforeMount } from 'vue'
 import { RouterView } from 'vue-router'
 // components
 import TheHeader from '@/components/header/TheHeader.vue'
+// utils
+import { useDrugStore } from '@/stores/useDrugStore'
+import { useAuthStore } from '@/stores/useAuthStore'
+import { fetchMedications } from '@/api'
+
+const { setDrugs } = useDrugStore()
+const { autoLoginUser } = useAuthStore()
+
+onBeforeMount(async () => {
+  const res = await fetchMedications()
+  setDrugs(res)
+
+  autoLoginUser()
+})
 </script>
 
 <template>

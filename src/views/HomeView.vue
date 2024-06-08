@@ -9,23 +9,8 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount } from 'vue'
 // components
 import PatientsList from '@/components/home/PatientsList.vue'
-// utils
-import { useDrugStore } from '@/stores/useDrugStore'
-import { useAuthStore } from '@/stores/useAuthStore'
-import { fetchMedications } from '@/api'
-import DUMMY_DATA from '@/assets/DOCTOR_DATA'
-
-const { setDrugs } = useDrugStore()
-const { setUser } = useAuthStore()
-
-onBeforeMount(async () => {
-  const res = await fetchMedications()
-  setDrugs(res)
-  setUser(DUMMY_DATA.doctors[0])
-})
 </script>
 
 <style lang="sass" scoped>
