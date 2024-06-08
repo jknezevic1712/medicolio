@@ -1,7 +1,9 @@
 <template>
   <section>
     <base-card title="Your patients">
-      <patients-list />
+      <div class="patients-list-container">
+        <patients-list />
+      </div>
     </base-card>
   </section>
 </template>
@@ -26,4 +28,9 @@ onBeforeMount(async () => {
 })
 </script>
 
-<style lang="sass" scoped></style>
+<style lang="sass" scoped>
+.patients-list-container
+  display: flex
+  justify-content: center
+  align-items: center
+</style>

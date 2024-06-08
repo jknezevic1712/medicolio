@@ -19,6 +19,7 @@ const doctorStore = useDoctorStore()
 <style lang="sass" scoped>
 .list
   width: 100%
+  max-width: 50rem
   display: flex
   flex-direction: column
   gap: 0.5rem
