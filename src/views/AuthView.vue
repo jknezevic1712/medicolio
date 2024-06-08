@@ -2,7 +2,9 @@
 import { computed, reactive } from 'vue'
 // utils
 import useAuthStore from '@/stores/useAuthStore'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const authStore = useAuthStore()
 
 const authData = reactive({
@@ -30,6 +32,7 @@ function handleFormSubmit() {
   }
 
   authStore.authUser(formData, authData.isLoginMode)
+  router.push('/')
 }
 </script>
 

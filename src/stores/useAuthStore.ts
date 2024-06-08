@@ -33,8 +33,6 @@ const useAuthStore = defineStore(
       localStorage.setItem('medicolio-userData', JSON.stringify(data))
       localStorage.setItem('medicolio-tokenExpiration', expirationDate.toString())
       user.value = data
-
-      router.push('/')
     }
 
     function autoLoginUser() {
