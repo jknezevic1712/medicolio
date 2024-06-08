@@ -43,10 +43,8 @@ function handleFormSubmit() {
 <template>
   <section>
     <base-card title="Your profile">
-      <!-- <base-form :data="formData" :submitFn="handleFormSubmit" :resetFn="handleFormReset" /> -->
       <div class="form-container">
         <form id="profile-form" class="form" @submit.prevent="handleFormSubmit">
-          <!-- <base-form-control :key="idx" v-for="(item, idx) in data" :item="item" /> -->
           <span :key="idx" v-for="(control, idx) in formData" class="form-control">
             <label :for="control.label">{{ control.label }}:</label>
             <input
@@ -99,7 +97,7 @@ function handleFormSubmit() {
     padding: 0.25rem
     transition: all 150ms ease-out
 
-  input:hover
+  input:not([disabled]):hover
     border-color: $base-color-2
   input:disabled
     background-color: $base-color-4-dimmed
