@@ -20,6 +20,10 @@ const useAuthStore = defineStore(
         return patient
       })
     })
+    function registerPatient(data: Patient) {
+      user.value?.patients.push(data)
+      saveUserData()
+    }
 
     function authUser(data: Doctor, isLogin: boolean) {
       // TODO: actions for login/register
@@ -30,11 +34,10 @@ const useAuthStore = defineStore(
         logoutUser()
       }, expiresIn)
 
-      localStorage.setItem('medicolio-userData', JSON.stringify(data))
+      saveUserData()
       localStorage.setItem('medicolio-tokenExpiration', expirationDate.toString())
       user.value = data
     }
-
     function autoLoginUser() {
       const userData = localStorage.getItem('medicolio-userData')
       const tokenExpiration = localStorage.getItem('medicolio-tokenExpiration')
@@ -52,7 +55,6 @@ const useAuthStore = defineStore(
 
       authUser(JSON.parse(userData), true)
     }
-
     function logoutUser() {
       clearTimeout(timer)
 
@@ -62,8 +64,11 @@ const useAuthStore = defineStore(
 
       router.push('/auth')
     }
+    function saveUserData() {
+      localStorage.setItem('medicolio-userData', JSON.stringify(user.value))
+    }
 
-    return { user, hasPatients, patientsList, authUser, autoLoginUser, logoutUser }
+    return { user, hasPatients, patientsList, registerPatient, authUser, autoLoginUser, logoutUser }
   },
   {
     persist: {
