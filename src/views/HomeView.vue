@@ -2,12 +2,12 @@
 import { ref } from 'vue'
 // components
 import PatientsList from '@/components/home/PatientsList.vue'
-import RegisterPatient from '@/components/home/RegisterPatient.vue'
+import ManagePatient from '@/components/home/ManagePatient.vue'
 
 export default {
   components: {
     PatientsList,
-    RegisterPatient
+    ManagePatient
   },
   setup() {
     const showDialog = ref(false)
@@ -35,7 +35,7 @@ export default {
 <template>
   <section>
     <base-dialog :show="showDialog" title="Register Patient" @close="handleDialogClose">
-      <register-patient @closeDialog="handleDialogClose(true)" />
+      <manage-patient @closeDialog="handleDialogClose(true)" />
     </base-dialog>
     <base-card title="Your patients">
       <template #actions>
