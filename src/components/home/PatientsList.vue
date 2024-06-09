@@ -23,4 +23,7 @@ const authStore = useAuthStore()
   display: flex
   flex-direction: column
   gap: 0.5rem
+
+  p:first-child
+    font-weight: bold
 </style>
