@@ -10,6 +10,7 @@ import BaseCard from '@/components/shared/BaseCard.vue'
 import BaseSpinner from '@/components/shared/BaseSpinner.vue'
 import BaseForm from '@/components/shared/BaseForm.vue'
 import BaseFormControl from '@/components/shared/BaseFormControl.vue'
+import BaseDialog from '@/components/shared/BaseDialog.vue'
 
 const app = createApp(App)
 const store = createPinia()
@@ -23,5 +24,6 @@ app.component('base-card', BaseCard)
 app.component('base-spinner', BaseSpinner)
 app.component('base-form', BaseForm)
 app.component('base-form-control', BaseFormControl)
+app.component('base-dialog', BaseDialog)
 
 app.mount('#app')
