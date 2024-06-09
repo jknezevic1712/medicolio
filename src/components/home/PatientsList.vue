@@ -3,17 +3,26 @@
 import ListItem from './ListItem.vue'
 // utils
 import useAuthStore from '@/stores/useAuthStore'
+// types
+import type { Patient } from '@/assets/types/DoctorData'
 
+const emit = defineEmits<{
+  'manage-patient': [data: Patient]
+}>()
 const authStore = useAuthStore()
 </script>
 
 <template>
-  <section class="list" v-if="authStore.user">
-    <list-item :key="patient.PIN" v-for="patient in authStore.patientsList">
+  <div class="list" v-if="authStore.user">
+    <list-item
+      :key="patient.PIN"
+      v-for="patient in authStore.patientsList"
+      @click="emit('manage-patient', patient)"
+    >
       <p>{{ patient.name }}</p>
       <p>{{ patient.PIN }}</p>
     </list-item>
-  </section>
+  </div>
 </template>
 
 <style lang="sass" scoped>

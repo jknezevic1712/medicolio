@@ -20,8 +20,20 @@ const useAuthStore = defineStore(
         return patient
       })
     })
-    function registerPatient(data: Patient) {
-      user.value?.patients.push(data)
+    function managePatient(data: Patient) {
+      const patientExists = user.value?.patients.find((patient) => patient.id === data.id)
+
+      if (!patientExists) {
+        user.value?.patients.push(data)
+      } else {
+        user.value!.patients = user.value!.patients.map((patient) => {
+          if (patient.id === data.id) {
+            return data
+          }
+          return patient
+        })
+      }
+
       saveUserData()
     }
 
@@ -68,7 +80,7 @@ const useAuthStore = defineStore(
       localStorage.setItem('medicolio-userData', JSON.stringify(user.value))
     }
 
-    return { user, hasPatients, patientsList, registerPatient, authUser, autoLoginUser, logoutUser }
+    return { user, hasPatients, patientsList, managePatient, authUser, autoLoginUser, logoutUser }
   },
   {
     persist: {

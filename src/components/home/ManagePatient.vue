@@ -1,6 +1,10 @@
 <script lang="ts">
-import useAuthStore from '@/stores/useAuthStore'
 import { reactive } from 'vue'
+// utils
+import useAuthStore from '@/stores/useAuthStore'
+// types
+import type { PropType } from 'vue'
+import type { Patient } from '@/assets/types/DoctorData'
 
 const defaultPatientData = {
   name: '',
@@ -9,15 +13,20 @@ const defaultPatientData = {
   prescribtions: []
 }
 export default {
+  props: {
+    patientData: {
+      type: Object as PropType<Patient> | null,
+      required: false
+    }
+  },
   emits: ['closeDialog'],
-  setup(_props, { emit }) {
+  setup(props, { emit }) {
     const authStore = useAuthStore()
-
-    const formData = reactive(defaultPatientData)
+    const formData = reactive(props.patientData ?? defaultPatientData)
 
     function handleFormSubmit() {
-      const patientData = {
-        id: Date.now(),
+      let patientData: Patient = {
+        id: props.patientData ? props.patientData.id : Date.now(),
         name: formData.name,
         PIN: formData.PIN,
         diagnosis: formData.diagnosis,
@@ -25,7 +34,7 @@ export default {
       }
 
       // TODO: Save patient data to DB
-      authStore.registerPatient(patientData)
+      authStore.managePatient(patientData)
       emit('closeDialog')
     }
 
