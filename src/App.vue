@@ -6,12 +6,13 @@ import TheHeader from '@/components/header/TheHeader.vue'
 // utils
 import useDrugStore from '@/stores/useDrugStore'
 import useAuthStore from '@/stores/useAuthStore'
-import { fetchMedications } from '@/api'
+import useAPI from '@/api'
 
 const drugStore = useDrugStore()
 const authStore = useAuthStore()
 
 onBeforeMount(async () => {
+  const { fetchMedications } = useAPI()
   const res = await fetchMedications()
   drugStore.setDrugs(res)
 
