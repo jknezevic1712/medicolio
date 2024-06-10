@@ -46,9 +46,11 @@ export default {
 
 <template>
   <section>
-    <base-dialog :show="showDialog" title="Register Patient" @close="handleDialogClose">
-      <manage-patient @closeDialog="handleDialogClose(true)" :patientData="patientData" />
-    </base-dialog>
+    <manage-patient
+      :showDialog="showDialog"
+      @closeDialog="handleDialogClose"
+      :patientData="patientData"
+    />
     <base-card title="Your patients">
       <template #actions>
         <base-button class="card-action" @click="handleDialogOpen">New Patient</base-button>

@@ -14,6 +14,10 @@ const defaultPatientData = {
 }
 export default {
   props: {
+    showDialog: {
+      type: Boolean,
+      required: true
+    },
     patientData: {
       type: Object as PropType<Patient> | null,
       required: false
@@ -35,7 +39,7 @@ export default {
 
       // TODO: Save patient data to DB
       authStore.managePatient(patientData)
-      emit('closeDialog')
+      emit('closeDialog', true)
     }
 
     return { handleFormSubmit, formData }
@@ -44,26 +48,29 @@ export default {
 </script>
 
 <template>
-  <div class="form-container">
-    <form id="auth-form" class="form" @submit.prevent="handleFormSubmit">
-      <span class="form-control">
-        <label for="name">Name:</label>
-        <input id="name" type="text" autocomplete="name" required v-model="formData.name" />
-      </span>
-      <span class="form-control">
-        <label for="PIN">PIN:</label>
-        <input id="PIN" type="text" autocomplete="pin" required v-model="formData.PIN" />
-      </span>
-      <span class="form-control">
-        <label for="diagnosis">Diagnosis:</label>
-        <textarea id="diagnosis" required v-model="formData.diagnosis" />
-      </span>
-
+  <base-dialog :show="showDialog" title="Register Patient" @close="$emit('closeDialog')">
+    <div class="form-container">
+      <form id="auth-form" class="form" @submit.prevent="handleFormSubmit">
+        <span class="form-control">
+          <label for="name">Name:</label>
+          <input id="name" type="text" autocomplete="name" required v-model="formData.name" />
+        </span>
+        <span class="form-control">
+          <label for="PIN">PIN:</label>
+          <input id="PIN" type="text" autocomplete="pin" required v-model="formData.PIN" />
+        </span>
+        <span class="form-control">
+          <label for="diagnosis">Diagnosis:</label>
+          <textarea id="diagnosis" required v-model="formData.diagnosis" />
+        </span>
+      </form>
+    </div>
+    <template #actions>
       <div class="form-actions">
-        <base-button type="submit">Register</base-button>
+        <base-button type="submit" form="auth-form">Register</base-button>
       </div>
-    </form>
-  </div>
+    </template>
+  </base-dialog>
 </template>
 
 <style lang="sass" scoped>
@@ -108,10 +115,9 @@ export default {
   textarea
     resize: none
     min-height: 150px
-    @media screen and (min-width: $breakpoint-md)
 
   input, textarea
-    max-width: 200px
+    width: 100%
     @media screen and (min-width: $breakpoint-md)
       max-width: unset
       width: 250px
@@ -122,6 +128,9 @@ export default {
   justify-content: center
   align-items: center
   margin-top: 2rem
+  @media screen and (min-width: $breakpoint-md)
+      width: fit-content
+      justify-content: flex-end
 
   button
     width: 100%
