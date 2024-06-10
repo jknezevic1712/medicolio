@@ -6,17 +6,20 @@ const props = withDefaults(
     to?: string
     color?: 'primary' | 'destructive'
     disabled?: boolean
+    icon?: boolean
   }>(),
   {
     color: 'primary',
-    disabled: false
+    disabled: false,
+    icon: false
   }
 )
 
 const btnClasses = computed(() => ({
   primary: props.color === 'primary',
   destructive: props.color === 'destructive',
-  disabled: props.disabled
+  disabled: props.disabled,
+  icon: props.icon
 }))
 </script>
 
@@ -67,4 +70,8 @@ const btnClasses = computed(() => ({
   &:hover
     color: $base-color-1
     background-color: $base-color-4-dimmed
+
+.icon
+  border-radius: 100%
+  padding: 0.4rem 0.75rem
 </style>

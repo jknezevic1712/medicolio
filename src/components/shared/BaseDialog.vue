@@ -36,6 +36,9 @@ export default {
           <slot name="header">
             <h2>{{ title }}</h2>
           </slot>
+          <base-button v-if="$slots.actions" icon @click="tryClose">
+            <span class="header-action">X</span>
+          </base-button>
         </header>
         <section>
           <slot></slot>
@@ -80,10 +83,18 @@ header
   color: white
   width: 100%
   padding: 1rem
+  display: flex
+  justify-content: space-between
+  align-items: center
 
-header h2
-  margin: 0
-  color: $base-color-1
+  h2
+    margin: 0
+    color: $base-color-1
+
+  .header-action
+    font-size: 1.25rem
+    @media screen and (min-width: $breakpoint-md)
+      font-size: 1.5rem
 
 section
   padding: 1rem
@@ -94,7 +105,7 @@ menu
   justify-content: flex-end
   margin: 0
 
-@media (min-width: 768px)
+@media screen and (min-width: $breakpoint-md)
   dialog
     left: calc(50% - 20rem)
     width: 40rem
