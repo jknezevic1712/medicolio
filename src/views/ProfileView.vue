@@ -2,10 +2,13 @@
 import { computed, ref } from 'vue'
 // utils
 import useAuthStore from '@/stores/useAuthStore'
+// types
 import type { FormDataProps } from '@/assets/types/General'
+import type { Doctor } from '@/assets/types/DoctorData'
 
 const authStore = useAuthStore()
 
+const isLoading = ref(false)
 const userPin = ref(authStore.user!.PIN)
 const userName = ref(authStore.user!.name)
 const userTitle = ref(authStore.user!.title)
@@ -45,12 +48,29 @@ function handleFormReset() {
 }
 
 function handleFormSubmit() {
-  return
+  isLoading.value = true
+
+  const formData: Partial<Doctor> = {
+    name: userName.value,
+    title: userTitle.value
+  }
+
+  try {
+    authStore.setUser(formData)
+    isLoading.value = false
+  } catch (err) {
+    isLoading.value = false
+    console.log('Error submitting ', err)
+  }
 }
 </script>
 
 <template>
   <section>
+    <base-dialog fixed :show="isLoading" title="Submitting...">
+      <base-spinner />
+    </base-dialog>
+
     <base-card title="Your profile">
       <div class="form-container">
         <form id="profile-form" class="form" @submit.prevent="handleFormSubmit">

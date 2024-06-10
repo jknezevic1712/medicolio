@@ -79,8 +79,25 @@ const useAuthStore = defineStore(
     function saveUserDataToLocalStorage() {
       localStorage.setItem('medicolio-userData', JSON.stringify(user.value))
     }
+    function setUser(data: Partial<Doctor>) {
+      user.value = {
+        ...user.value,
+        ...data
+      } as Doctor
 
-    return { user, hasPatients, patientsList, managePatient, authUser, autoLoginUser, logoutUser }
+      saveUserDataToLocalStorage()
+    }
+
+    return {
+      user,
+      hasPatients,
+      patientsList,
+      managePatient,
+      authUser,
+      autoLoginUser,
+      logoutUser,
+      setUser
+    }
   },
   {
     persist: {
