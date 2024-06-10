@@ -5,17 +5,20 @@ export type PatientPrescribtion = {
 }
 
 export type Patient = {
-  id: number
+  id: string
   name: string
   PIN: string
   diagnosis: string
   prescribtions: PatientPrescribtion[]
+  doctorId: string
 }
 
 export type Doctor = {
-  id: number
+  id: string
   name: string
   PIN: string
   title: string
   patients: Patient[]
 }
+
+export type User = Doctor | Patient

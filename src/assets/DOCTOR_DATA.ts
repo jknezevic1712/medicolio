@@ -1,13 +1,13 @@
 export default {
   doctors: [
     {
-      id: 1,
+      id: '10232232032',
       name: 'Joe Frazier',
       PIN: '10232232032',
       title: 'MD',
       patients: [
         {
-          id: 1,
+          id: '20230232032',
           name: 'Bolek Randolph',
           PIN: '20230232032',
           diagnosis:
@@ -31,7 +31,7 @@ export default {
           ]
         },
         {
-          id: 2,
+          id: '20230232223',
           name: 'Lolek Randolph',
           PIN: '20230232223',
           diagnosis:
@@ -57,7 +57,7 @@ export default {
       ]
     },
     {
-      id: 2,
+      id: '10232232634',
       name: 'Iron Mike',
       PIN: '10232232634',
       title: 'MD',
@@ -87,7 +87,7 @@ export default {
           ]
         },
         {
-          id: 3,
+          id: '20230212232',
           name: 'Jack Black',
           PIN: '20230212232',
           diagnosis:
@@ -113,13 +113,13 @@ export default {
       ]
     },
     {
-      id: 1,
+      id: '16632232032',
       name: 'Stephen King',
       PIN: '16632232032',
       title: 'MD',
       patients: [
         {
-          id: 1,
+          id: '20266632032',
           name: 'Michael Light',
           PIN: '20266632032',
           diagnosis:
@@ -143,7 +143,7 @@ export default {
           ]
         },
         {
-          id: 2,
+          id: '20789632032',
           name: 'JJ Randolph',
           PIN: '20789632032',
           diagnosis:

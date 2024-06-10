@@ -34,11 +34,12 @@ export default {
       isLoading.value = true
 
       let patientData: Patient = {
-        id: props.patientData ? props.patientData.id : Date.now(),
+        id: props.patientData ? props.patientData.id : Date.now().toString(),
         name: formData.name,
         PIN: formData.PIN,
         diagnosis: formData.diagnosis,
-        prescribtions: formData.prescribtions
+        prescribtions: formData.prescribtions,
+        doctorId: authStore.user!.id
       }
 
       try {
