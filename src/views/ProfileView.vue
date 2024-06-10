@@ -40,13 +40,6 @@ const formData: FormDataProps[] = [
   }
 ]
 
-function handleFormReset() {
-  // TODO: think of something else, maybe api request that sends initial data?
-  // form.PIN = authStore.user!.PIN
-  // form.name = authStore.user!.name
-  // form.title = authStore.user!.title
-}
-
 function handleFormSubmit() {
   isLoading.value = true
 
@@ -87,14 +80,6 @@ function handleFormSubmit() {
           </span>
 
           <div class="form-actions">
-            <!-- <base-button
-              type="reset"
-              @click="handleFormReset"
-              color="destructive"
-              :disabled="!isFormDirty"
-            >
-              Reset
-            </base-button> -->
             <base-button type="submit" :disabled="!isFormDirty">Save</base-button>
           </div>
         </form>
