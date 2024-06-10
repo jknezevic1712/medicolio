@@ -57,10 +57,11 @@ function handleFormSubmit() {
 
   try {
     authStore.setUser(formData)
+
     isLoading.value = false
   } catch (err) {
     isLoading.value = false
-    console.log('Error submitting ', err)
+    console.log('Error submitting the form: ', err)
   }
 }
 </script>

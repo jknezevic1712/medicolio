@@ -1,5 +1,5 @@
 <script lang="ts">
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 // utils
 import useAuthStore from '@/stores/useAuthStore'
 // types
@@ -19,16 +19,20 @@ export default {
       required: true
     },
     patientData: {
-      type: Object as PropType<Patient> | null,
+      type: Object as PropType<Patient> | undefined,
       required: false
     }
   },
   emits: ['closeDialog'],
   setup(props, { emit }) {
     const authStore = useAuthStore()
+
+    const isLoading = ref(false)
     const formData = reactive(props.patientData ?? defaultPatientData)
 
     function handleFormSubmit() {
+      isLoading.value = true
+
       let patientData: Patient = {
         id: props.patientData ? props.patientData.id : Date.now(),
         name: formData.name,
@@ -37,9 +41,15 @@ export default {
         prescribtions: formData.prescribtions
       }
 
-      // TODO: Save patient data to DB
-      authStore.managePatient(patientData)
-      emit('closeDialog', true)
+      try {
+        authStore.managePatient(patientData)
+        emit('closeDialog', true)
+
+        isLoading.value = false
+      } catch (err) {
+        isLoading.value = false
+        console.log('Error submitting the form: ', err)
+      }
     }
 
     return { handleFormSubmit, formData }
