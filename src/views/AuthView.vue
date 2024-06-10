@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, reactive } from 'vue'
+import { computed, reactive, ref } from 'vue'
 // utils
 import useAuthStore from '@/stores/useAuthStore'
 import { useRouter } from 'vue-router'
@@ -7,6 +7,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const authStore = useAuthStore()
 
+const isLoading = ref(false)
 const authData = reactive({
   username: '',
   password: '',
@@ -23,6 +24,9 @@ function handleAuthModeChange() {
 }
 function handleFormSubmit() {
   // TODO: Different data for login/register
+
+  isLoading.value = true
+
   const formData = {
     id: Date.now(),
     name: authData.username,
@@ -31,13 +35,24 @@ function handleFormSubmit() {
     patients: []
   }
 
-  authStore.authUser(formData, authData.isLoginMode)
-  router.push('/')
+  try {
+    authStore.authUser(formData, authData.isLoginMode)
+    isLoading.value = false
+
+    router.push('/')
+  } catch (err) {
+    isLoading.value = false
+    console.log('Error submitting the form: ', err)
+  }
 }
 </script>
 
 <template>
   <section>
+    <base-dialog fixed :show="isLoading" title="Authenticating...">
+      <base-spinner />
+    </base-dialog>
+
     <base-card title="Authentication">
       <div class="form-container">
         <form id="auth-form" class="form" @submit.prevent="handleFormSubmit">
