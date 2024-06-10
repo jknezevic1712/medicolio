@@ -34,7 +34,7 @@ const useAuthStore = defineStore(
         })
       }
 
-      saveUserData()
+      saveUserDataToLocalStorage()
     }
 
     function authUser(data: Doctor, isLogin: boolean) {
@@ -46,7 +46,7 @@ const useAuthStore = defineStore(
         logoutUser()
       }, expiresIn)
 
-      saveUserData()
+      saveUserDataToLocalStorage()
       localStorage.setItem('medicolio-tokenExpiration', expirationDate.toString())
       user.value = data
     }
@@ -76,7 +76,7 @@ const useAuthStore = defineStore(
 
       router.push('/auth')
     }
-    function saveUserData() {
+    function saveUserDataToLocalStorage() {
       localStorage.setItem('medicolio-userData', JSON.stringify(user.value))
     }
 
