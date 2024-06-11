@@ -82,7 +82,6 @@ export default function useAPI() {
       const err = new Error('Failed to authenticate.')
       throw err
     }
-    console.log('authResData ', authResData)
     const userData = await manageUserData(payload, isLogin, authResData.localId)
     if (!userData) {
       const err = new Error('Failed to fetch user data.')

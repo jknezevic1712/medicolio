@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // types
-import type { FormDataProps } from '@/assets/types/General'
+import type { FormDataProps } from '@/assets/types/Form'
 
 const props = defineProps<{
   item: FormDataProps
