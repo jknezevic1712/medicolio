@@ -1,7 +1,7 @@
 // utils
 import API_ENDPOINTS from '@/assets/API'
 import { initializeApp } from 'firebase/app'
-import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore'
+import { doc, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore'
 import useAuthStore from '@/stores/useAuthStore'
 // types
 import type { DrugAPIResponse, DrugData, UserAuthResData } from '@/assets/types/API'
@@ -157,11 +157,27 @@ export default function useAPI() {
     authStore.setUser(userData)
   }
 
+  type UpdateUserProps = {
+    userId: string
+    name: string
+    title: string
+  }
+  async function updateUser(payload: UpdateUserProps) {
+    const { userId, ...userData } = payload
+
+    const userRef = doc(db, 'users', userId)
+    await updateDoc(userRef, {
+      ...userData
+    })
+    authStore.setUser(userData)
+  }
+
   return {
     fetchMedications,
     authUser,
     manageUserData,
     logoutUser,
-    autoLoginUser
+    autoLoginUser,
+    updateUser
   }
 }

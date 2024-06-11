@@ -2,11 +2,13 @@
 import { computed, ref } from 'vue'
 // utils
 import useAuthStore from '@/stores/useAuthStore'
+import useAPI from '@/api/useApi'
 // types
 import type { FormDataProps } from '@/assets/types/Form'
 import type { Doctor } from '@/assets/types/General'
 
 const authStore = useAuthStore()
+const api = useAPI()
 
 const isLoading = ref(false)
 const userPin = ref(authStore.user!.pin)
@@ -40,16 +42,17 @@ const formData: FormDataProps[] = [
   }
 ]
 
-function handleFormSubmit() {
+async function handleFormSubmit() {
   isLoading.value = true
 
-  const formData: Partial<Doctor> = {
+  const formData: Pick<Doctor, 'name' | 'title'> = {
     name: userName.value,
     title: userTitle.value
   }
 
   try {
-    authStore.setUser(formData)
+    const userId = localStorage.getItem('medicolio-userId')!
+    await api.updateUser({ ...formData, userId })
 
     isLoading.value = false
   } catch (err) {

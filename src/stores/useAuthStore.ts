@@ -12,7 +12,10 @@ const useAuthStore = defineStore(
 
     const user = ref<Doctor | null>(null)
     function setUser(payload: Partial<Doctor>) {
-      user.value = payload as Doctor
+      user.value = {
+        ...user.value,
+        ...(payload as Doctor)
+      }
     }
     function logoutUser() {
       user.value = null
