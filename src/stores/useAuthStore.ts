@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 // utils
 import { useRouter } from 'vue-router'
 // types
-import type { Doctor, Patient } from '@/assets/types/General'
+import type { Doctor } from '@/assets/types/General'
 
 const useAuthStore = defineStore(
   'auth',
@@ -23,33 +23,12 @@ const useAuthStore = defineStore(
     }
 
     const hasPatients = computed(() => user.value!.patients.length > 0)
-    const patientsList = computed(() => {
-      return user.value!.patients.map((patient: Patient) => {
-        return patient
-      })
-    })
-    function managePatient(data: Patient) {
-      const patientExists = user.value?.patients.find((patient) => patient.id === data.id)
-
-      if (!patientExists) {
-        user.value?.patients.push(data)
-      } else {
-        user.value!.patients = user.value!.patients.map((patient) => {
-          if (patient.id === data.id) {
-            return data
-          }
-          return patient
-        })
-      }
-
-      localStorage.setItem('medicolio-userData', JSON.stringify(user.value))
-    }
+    const patientsList = computed(() => [...user.value!.patients])
 
     return {
       user,
       hasPatients,
       patientsList,
-      managePatient,
       logoutUser,
       setUser
     }

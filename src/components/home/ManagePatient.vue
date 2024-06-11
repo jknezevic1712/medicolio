@@ -2,6 +2,7 @@
 import { reactive, ref } from 'vue'
 // utils
 import useAuthStore from '@/stores/useAuthStore'
+import useAPI from '@/api/useApi'
 // types
 import type { PropType } from 'vue'
 import type { Patient } from '@/assets/types/General'
@@ -20,23 +21,28 @@ export default {
       type: Boolean,
       required: true
     },
-    patientData: {
-      type: Object as PropType<Patient> | undefined,
+    patientId: {
+      type: String as PropType<Patient['id']> | undefined,
       required: false
     }
   },
   emits: ['closeDialog'],
   setup(props, { emit }) {
     const authStore = useAuthStore()
+    const api = useAPI()
 
     const isLoading = ref(false)
-    const formData = reactive(props.patientData ?? defaultPatientData)
+    const formData = reactive(
+      props.patientId
+        ? authStore.user!.patients.find((pat) => pat.id === props.patientId)!
+        : defaultPatientData
+    )
 
-    function handleFormSubmit() {
+    async function handleFormSubmit() {
       isLoading.value = true
 
-      let patientData: Patient = {
-        id: props.patientData ? props.patientData.id : Date.now().toString(),
+      const patientData: Patient = {
+        id: props.patientId ? props.patientId : Date.now().toString(),
         name: formData.name,
         pin: formData.pin,
         diagnosis: formData.diagnosis,
@@ -44,9 +50,32 @@ export default {
         doctorId: authStore.user!.id,
         email: formData.email
       }
+      const updatedPatients = () => {
+        if (authStore.patientsList.length === 0) {
+          return [patientData]
+        }
+
+        let patientExists = false
+
+        const newPatientsList = authStore.patientsList.map((patient) => {
+          if (patient.id === patientData.id) {
+            patientExists = true
+            return patientData
+          }
+          return patient
+        })
+
+        if (!patientExists) {
+          newPatientsList.push(patientData)
+        }
+
+        return newPatientsList
+      }
 
       try {
-        authStore.managePatient(patientData)
+        await api.updateUser({
+          patients: updatedPatients()
+        })
         emit('closeDialog', true)
 
         isLoading.value = false

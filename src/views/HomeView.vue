@@ -12,7 +12,7 @@ export default {
     ManagePatient
   },
   setup() {
-    const selectedPatient = ref<Patient | undefined>(undefined)
+    const selectedPatientId = ref<Patient['id'] | undefined>(undefined)
     const showDialog = ref(false)
 
     function handleDialogOpen() {
@@ -20,7 +20,7 @@ export default {
     }
 
     function handleDialogClose(force?: boolean) {
-      selectedPatient.value = undefined
+      selectedPatientId.value = undefined
 
       if (force) {
         showDialog.value = false
@@ -29,8 +29,8 @@ export default {
       }
     }
 
-    function handleManagePatient(data: Patient) {
-      selectedPatient.value = data
+    function handleManagePatient(data: Patient['id']) {
+      selectedPatientId.value = data
       handleDialogOpen()
     }
 
@@ -39,7 +39,7 @@ export default {
       handleDialogOpen,
       handleDialogClose,
       handleManagePatient,
-      selectedPatient
+      selectedPatientId
     }
   }
 }
@@ -48,10 +48,10 @@ export default {
 <template>
   <section>
     <manage-patient
-      :key="selectedPatient?.id"
+      :key="selectedPatientId"
       :showDialog="showDialog"
       @closeDialog="handleDialogClose"
-      :patientData="selectedPatient"
+      :patientId="selectedPatientId"
     />
     <base-card title="Your patients">
       <template #actions>

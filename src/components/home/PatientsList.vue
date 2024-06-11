@@ -7,7 +7,7 @@ import useAuthStore from '@/stores/useAuthStore'
 import type { Patient } from '@/assets/types/General'
 
 const emit = defineEmits<{
-  'manage-patient': [data: Patient]
+  'manage-patient': [data: Patient['id']]
 }>()
 const authStore = useAuthStore()
 </script>
@@ -17,7 +17,7 @@ const authStore = useAuthStore()
     <list-item
       :key="patient.pin"
       v-for="patient in authStore.patientsList"
-      @click="emit('manage-patient', patient)"
+      @click="emit('manage-patient', patient.id)"
     >
       <p>{{ patient.name }}</p>
       <p>{{ patient.pin }}</p>
