@@ -157,19 +157,15 @@ export default function useAPI() {
     authStore.setUser(userData)
   }
 
-  type UpdateUserProps = {
-    userId: string
-    name: string
-    title: string
-  }
-  async function updateUser(payload: UpdateUserProps) {
-    const { userId, ...userData } = payload
+  async function updateUser(payload: Partial<Doctor>) {
+    const userId = localStorage.getItem('medicolio-userId')
+    if (!userId) return
 
     const userRef = doc(db, 'users', userId)
     await updateDoc(userRef, {
-      ...userData
+      ...payload
     })
-    authStore.setUser(userData)
+    authStore.setUser(payload)
   }
 
   return {

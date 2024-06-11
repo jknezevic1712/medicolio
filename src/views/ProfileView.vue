@@ -51,8 +51,7 @@ async function handleFormSubmit() {
   }
 
   try {
-    const userId = localStorage.getItem('medicolio-userId')!
-    await api.updateUser({ ...formData, userId })
+    await api.updateUser(formData)
 
     isLoading.value = false
   } catch (err) {
