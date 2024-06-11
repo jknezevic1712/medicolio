@@ -5,10 +5,12 @@ export default {
       name: 'Joe Frazier',
       PIN: '10232232032',
       title: 'MD',
+      email: 'joefrazier@test.com',
       patients: [
         {
           id: '20230232032',
           name: 'Bolek Randolph',
+          email: 'bolekrandolph@test.com',
           PIN: '20230232032',
           diagnosis:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec mauris porttitor, efficitur ipsum vitae, ultricies nulla. Vestibulum in tempus risus, sit amet sodales ligula. Proin nec dui at est luctus ullamcorper. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce tincidunt, enim id ultrices viverra, turpis lectus tincidunt neque, nec gravida augue lorem eget justo.',
@@ -33,6 +35,7 @@ export default {
         {
           id: '20230232223',
           name: 'Lolek Randolph',
+          email: 'lolekrandolph@test.com',
           PIN: '20230232223',
           diagnosis:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec mauris porttitor, efficitur ipsum vitae, ultricies nulla. Vestibulum in tempus risus, sit amet sodales ligula. Proin nec dui at est luctus ullamcorper. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce tincidunt, enim id ultrices viverra, turpis lectus tincidunt neque, nec gravida augue lorem eget justo.',
@@ -61,10 +64,12 @@ export default {
       name: 'Iron Mike',
       PIN: '10232232634',
       title: 'MD',
+      email: 'ironmike@test.com',
       patients: [
         {
           id: 1,
           name: 'Jesus Garcia',
+          email: 'jesusgarcia@test.com',
           PIN: '20255532032',
           diagnosis:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec mauris porttitor, efficitur ipsum vitae, ultricies nulla. Vestibulum in tempus risus, sit amet sodales ligula. Proin nec dui at est luctus ullamcorper. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce tincidunt, enim id ultrices viverra, turpis lectus tincidunt neque, nec gravida augue lorem eget justo.',
@@ -89,6 +94,7 @@ export default {
         {
           id: '20230212232',
           name: 'Jack Black',
+          email: 'jackblack@test.com',
           PIN: '20230212232',
           diagnosis:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec mauris porttitor, efficitur ipsum vitae, ultricies nulla. Vestibulum in tempus risus, sit amet sodales ligula. Proin nec dui at est luctus ullamcorper. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce tincidunt, enim id ultrices viverra, turpis lectus tincidunt neque, nec gravida augue lorem eget justo.',
@@ -117,10 +123,12 @@ export default {
       name: 'Stephen King',
       PIN: '16632232032',
       title: 'MD',
+      email: 'stephenking@test.com',
       patients: [
         {
           id: '20266632032',
           name: 'Michael Light',
+          email: 'michaellight@test.com',
           PIN: '20266632032',
           diagnosis:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec mauris porttitor, efficitur ipsum vitae, ultricies nulla. Vestibulum in tempus risus, sit amet sodales ligula. Proin nec dui at est luctus ullamcorper. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce tincidunt, enim id ultrices viverra, turpis lectus tincidunt neque, nec gravida augue lorem eget justo.',
@@ -145,6 +153,7 @@ export default {
         {
           id: '20789632032',
           name: 'JJ Randolph',
+          email: 'jjrandolph@test.com',
           PIN: '20789632032',
           diagnosis:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec mauris porttitor, efficitur ipsum vitae, ultricies nulla. Vestibulum in tempus risus, sit amet sodales ligula. Proin nec dui at est luctus ullamcorper. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce tincidunt, enim id ultrices viverra, turpis lectus tincidunt neque, nec gravida augue lorem eget justo.',

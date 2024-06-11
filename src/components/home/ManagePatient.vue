@@ -4,11 +4,13 @@ import { reactive, ref } from 'vue'
 import useAuthStore from '@/stores/useAuthStore'
 // types
 import type { PropType } from 'vue'
-import type { Patient } from '@/assets/types/DoctorData'
+import type { Patient } from '@/assets/types/General'
 
-const defaultPatientData = {
+const defaultPatientData: Omit<Patient, 'id'> = {
+  doctorId: '',
+  email: '',
   name: '',
-  PIN: '',
+  pin: '',
   diagnosis: '',
   prescribtions: []
 }
@@ -36,10 +38,11 @@ export default {
       let patientData: Patient = {
         id: props.patientData ? props.patientData.id : Date.now().toString(),
         name: formData.name,
-        PIN: formData.PIN,
+        pin: formData.pin,
         diagnosis: formData.diagnosis,
         prescribtions: formData.prescribtions,
-        doctorId: authStore.user!.id
+        doctorId: authStore.user!.id,
+        email: formData.email
       }
 
       try {
@@ -68,7 +71,7 @@ export default {
         </span>
         <span class="form-control">
           <label for="PIN">PIN:</label>
-          <input id="PIN" type="text" autocomplete="pin" required v-model="formData.PIN" />
+          <input id="PIN" type="text" autocomplete="pin" required v-model="formData.pin" />
         </span>
         <span class="form-control">
           <label for="diagnosis">Diagnosis:</label>

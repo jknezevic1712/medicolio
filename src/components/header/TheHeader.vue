@@ -4,13 +4,15 @@ import { computed } from 'vue'
 import LibraryTitle from './LibraryTitle.vue'
 // utils
 import useAuthStore from '@/stores/useAuthStore'
+import useAPI from '@/api/useApi'
 
 const authStore = useAuthStore()
+const api = useAPI()
 
 const userExists = computed(() => !!authStore.user)
 
 function handleLogout() {
-  authStore.logoutUser()
+  api.logoutUser()
 }
 </script>
 

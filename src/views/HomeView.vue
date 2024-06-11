@@ -4,7 +4,7 @@ import { ref } from 'vue'
 import PatientsList from '@/components/home/PatientsList.vue'
 import ManagePatient from '@/components/home/ManagePatient.vue'
 // types
-import type { Patient } from '@/assets/types/DoctorData'
+import type { Patient } from '@/assets/types/General'
 
 export default {
   components: {

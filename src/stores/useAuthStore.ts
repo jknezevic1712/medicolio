@@ -3,9 +3,7 @@ import { defineStore } from 'pinia'
 // utils
 import { useRouter } from 'vue-router'
 // types
-import type { Doctor, Patient } from '@/assets/types/DoctorData'
-
-let timer: undefined | NodeJS.Timeout
+import type { Doctor, Patient } from '@/assets/types/General'
 
 const useAuthStore = defineStore(
   'auth',
@@ -13,6 +11,13 @@ const useAuthStore = defineStore(
     const router = useRouter()
 
     const user = ref<Doctor | null>(null)
+    function setUser(payload: Partial<Doctor>) {
+      user.value = payload as Doctor
+    }
+    function logoutUser() {
+      user.value = null
+      router.push('/auth')
+    }
 
     const hasPatients = computed(() => user.value!.patients.length > 0)
     const patientsList = computed(() => {
@@ -34,58 +39,7 @@ const useAuthStore = defineStore(
         })
       }
 
-      saveUserDataToLocalStorage()
-    }
-
-    function authUser(data: Doctor, isLogin: boolean) {
-      // TODO: actions for login/register
-      const expiresIn = 2600 * 1000
-      const expirationDate = new Date().getTime() + expiresIn * 1000
-
-      timer = setTimeout(() => {
-        logoutUser()
-      }, expiresIn)
-
-      saveUserDataToLocalStorage()
-      localStorage.setItem('medicolio-tokenExpiration', expirationDate.toString())
-      user.value = data
-    }
-    function autoLoginUser() {
-      const userData = localStorage.getItem('medicolio-userData')
-      const tokenExpiration = localStorage.getItem('medicolio-tokenExpiration')
-      if (!userData || !tokenExpiration) return
-
-      const expiresIn = +tokenExpiration - new Date().getTime()
-      const expiresInSec = Math.floor(expiresIn / 1000)
-      if (expiresInSec < 10000) {
-        return
-      }
-
-      timer = setTimeout(() => {
-        logoutUser()
-      }, expiresInSec)
-
-      authUser(JSON.parse(userData), true)
-    }
-    function logoutUser() {
-      clearTimeout(timer)
-
-      localStorage.removeItem('medicolio-userData')
-      localStorage.removeItem('medicolio-tokenExpiration')
-      user.value = null
-
-      router.push('/auth')
-    }
-    function saveUserDataToLocalStorage() {
       localStorage.setItem('medicolio-userData', JSON.stringify(user.value))
-    }
-    function setUser(data: Partial<Doctor>) {
-      user.value = {
-        ...user.value,
-        ...data
-      } as Doctor
-
-      saveUserDataToLocalStorage()
     }
 
     return {
@@ -93,8 +47,6 @@ const useAuthStore = defineStore(
       hasPatients,
       patientsList,
       managePatient,
-      authUser,
-      autoLoginUser,
       logoutUser,
       setUser
     }

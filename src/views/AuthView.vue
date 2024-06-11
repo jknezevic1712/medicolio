@@ -1,42 +1,37 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
 import { computed, reactive, ref } from 'vue'
 // utils
-import useAuthStore from '@/stores/useAuthStore'
-import { useRouter } from 'vue-router'
+import useAPI from '@/api/useApi'
 
 const router = useRouter()
-const authStore = useAuthStore()
+const api = useAPI()
 
 const isLoading = ref(false)
-const authData = reactive({
-  username: '',
+const formData = reactive({
+  email: '',
   password: '',
-  isLoginMode: true
+  isLoginMode: true,
+  name: '',
+  title: '',
+  pin: ''
 })
 
 const authModeInfo = computed(() =>
-  authData.isLoginMode ? "Don't have an account yet?" : 'Already have an account?'
+  formData.isLoginMode ? "Don't have an account yet?" : 'Already have an account?'
 )
-const submitBtnTooltip = computed(() => (authData.isLoginMode ? 'Login' : 'Register'))
+const submitBtnTooltip = computed(() => (formData.isLoginMode ? 'Login' : 'Register'))
 
 function handleAuthModeChange() {
-  authData.isLoginMode = !authData.isLoginMode
+  formData.isLoginMode = !formData.isLoginMode
 }
-function handleFormSubmit() {
+async function handleFormSubmit() {
   // TODO: Different data for login/register
 
   isLoading.value = true
 
-  const formData = {
-    id: Date.now(),
-    name: authData.username,
-    PIN: '20230696032',
-    title: 'MD',
-    patients: []
-  }
-
   try {
-    authStore.authUser(formData, authData.isLoginMode)
+    await api.authUser(formData, formData.isLoginMode)
     isLoading.value = false
 
     router.push('/')
@@ -56,15 +51,29 @@ function handleFormSubmit() {
     <base-card title="Authentication">
       <div class="form-container">
         <form id="auth-form" class="form" @submit.prevent="handleFormSubmit">
+          <template v-if="!formData.isLoginMode">
+            <span class="form-control">
+              <label for="name">Name:</label>
+              <input id="name" type="text" autocomplete="name" required v-model="formData.name" />
+            </span>
+            <span class="form-control">
+              <label for="pin">PIN:</label>
+              <input id="pin" type="text" autocomplete="pin" required v-model="formData.pin" />
+            </span>
+            <span class="form-control">
+              <label for="title">Title:</label>
+              <input
+                id="title"
+                type="text"
+                autocomplete="title"
+                required
+                v-model="formData.title"
+              />
+            </span>
+          </template>
           <span class="form-control">
-            <label for="username">Username:</label>
-            <input
-              id="username"
-              type="text"
-              autocomplete="username"
-              required
-              v-model="authData.username"
-            />
+            <label for="email">Email:</label>
+            <input id="email" type="email" autocomplete="email" required v-model="formData.email" />
           </span>
           <span class="form-control">
             <label for="password">Password:</label>
@@ -73,7 +82,7 @@ function handleFormSubmit() {
               type="password"
               autocomplete="current-password"
               required
-              v-model="authData.password"
+              v-model="formData.password"
             />
           </span>
 

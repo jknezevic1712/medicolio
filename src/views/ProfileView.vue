@@ -3,13 +3,13 @@ import { computed, ref } from 'vue'
 // utils
 import useAuthStore from '@/stores/useAuthStore'
 // types
-import type { FormDataProps } from '@/assets/types/General'
-import type { Doctor } from '@/assets/types/DoctorData'
+import type { FormDataProps } from '@/assets/types/Form'
+import type { Doctor } from '@/assets/types/General'
 
 const authStore = useAuthStore()
 
 const isLoading = ref(false)
-const userPin = ref(authStore.user!.PIN)
+const userPin = ref(authStore.user!.pin)
 const userName = ref(authStore.user!.name)
 const userTitle = ref(authStore.user!.title)
 

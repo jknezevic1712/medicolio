@@ -4,7 +4,7 @@ import ListItem from './ListItem.vue'
 // utils
 import useAuthStore from '@/stores/useAuthStore'
 // types
-import type { Patient } from '@/assets/types/DoctorData'
+import type { Patient } from '@/assets/types/General'
 
 const emit = defineEmits<{
   'manage-patient': [data: Patient]
@@ -15,12 +15,12 @@ const authStore = useAuthStore()
 <template>
   <div class="list" v-if="authStore.user">
     <list-item
-      :key="patient.PIN"
+      :key="patient.pin"
       v-for="patient in authStore.patientsList"
       @click="emit('manage-patient', patient)"
     >
       <p>{{ patient.name }}</p>
-      <p>{{ patient.PIN }}</p>
+      <p>{{ patient.pin }}</p>
     </list-item>
   </div>
 </template>

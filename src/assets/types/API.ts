@@ -111,3 +111,12 @@ export type DrugData = {
   dosage_form: string
   drugs: Drug[]
 }
+
+export type UserAuthResData = {
+  kind: string
+  idToken: string
+  email: string
+  refreshToken: string
+  expiresIn: string
+  localId: string
+}
