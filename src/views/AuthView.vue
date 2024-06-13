@@ -26,8 +26,6 @@ function handleAuthModeChange() {
   formData.isLoginMode = !formData.isLoginMode
 }
 async function handleFormSubmit() {
-  // TODO: Different data for login/register
-
   isLoading.value = true
 
   try {
