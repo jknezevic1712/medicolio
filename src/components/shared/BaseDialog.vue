@@ -13,6 +13,11 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+    onTopOfDialog: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   emits: ['close'],
@@ -29,9 +34,22 @@ export default {
 
 <template>
   <teleport to="body">
-    <div v-if="show" @click="tryClose" class="backdrop"></div>
+    <div
+      v-if="show"
+      @click="tryClose"
+      class="backdrop"
+      :class="{
+        'on__top__of__dialog-backdrop': onTopOfDialog
+      }"
+    ></div>
     <transition name="dialog">
-      <dialog open v-if="show">
+      <dialog
+        open
+        v-if="show"
+        :class="{
+          'on__top__of__dialog-dialog': onTopOfDialog
+        }"
+      >
         <header>
           <slot name="header">
             <h2>{{ title }}</h2>
@@ -110,6 +128,11 @@ menu
     left: calc(50% - 20rem)
     width: 40rem
 
+.on__top__of__dialog-backdrop
+  z-index: 110
+
+.on__top__of__dialog-dialog
+  z-index: 120
 
 .dialog-enter-from,
 .dialog-leave-to
