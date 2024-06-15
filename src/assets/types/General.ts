@@ -1,16 +1,10 @@
-export type PatientPrescribtion = {
-  id: number
-  name: string
-  date_until: string
-}
-
 export type Patient = {
   id: string
   email: string
   name: string
   pin: string
   diagnosis: string
-  prescribtions: PatientPrescribtion[]
+  prescribtions: string[]
   doctorId: string
 }
 

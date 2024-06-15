@@ -1,7 +1,7 @@
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 // types
-import type { Drug, DrugData } from '@/assets/types/API'
+import type { DrugData } from '@/assets/types/API'
 
 const useDrugStore = defineStore(
   'drugs',
@@ -9,15 +9,15 @@ const useDrugStore = defineStore(
     const drugs = ref<DrugData[]>([])
 
     const drugList = computed(() => {
-      let drugList: Drug[] = []
+      let formattedDrugList: string[] = []
 
       drugs.value.forEach((drugManufacturer) => {
         drugManufacturer.drugs.forEach((drug) => {
-          drugList = [...drugList, drug]
+          formattedDrugList = [...formattedDrugList, drug.name + ` (${drug.strength})`]
         })
       })
 
-      return drugList
+      return formattedDrugList
     })
 
     const hasDrugs = computed(() => drugList.value.length > 0)

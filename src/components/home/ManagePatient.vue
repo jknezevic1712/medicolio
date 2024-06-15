@@ -3,6 +3,7 @@ import { reactive, ref } from 'vue'
 // utils
 import useAuthStore from '@/stores/useAuthStore'
 import useAPI from '@/api/useApi'
+import useDrugStore from '@/stores/useDrugStore'
 // types
 import type { PropType } from 'vue'
 import type { Patient } from '@/assets/types/General'
@@ -29,6 +30,7 @@ export default {
   emits: ['closeDialog'],
   setup(props, { emit }) {
     const authStore = useAuthStore()
+    const drugStore = useDrugStore()
     const api = useAPI()
 
     const isLoading = ref(false)
@@ -50,6 +52,7 @@ export default {
         doctorId: authStore.user!.id,
         email: formData.email
       }
+
       const updatedPatients = () => {
         if (authStore.patientsList.length === 0) {
           return [patientData]
@@ -85,7 +88,11 @@ export default {
       }
     }
 
-    return { handleFormSubmit, formData }
+    return {
+      handleFormSubmit,
+      formData,
+      drugList: drugStore.drugList
+    }
   }
 }
 </script>
@@ -103,8 +110,26 @@ export default {
           <input id="PIN" type="text" autocomplete="pin" required v-model="formData.pin" />
         </span>
         <span class="form-control">
+          <label for="email">Email:</label>
+          <input id="email" type="email" autocomplete="email" required v-model="formData.email" />
+        </span>
+        <span class="form-control">
           <label for="diagnosis">Diagnosis:</label>
           <textarea id="diagnosis" required v-model="formData.diagnosis" />
+        </span>
+        <span class="form-control">
+          <label for="prescribtions">Prescribtions:</label>
+          <select
+            id="prescribtions"
+            name="prescribtions"
+            v-model="formData.prescribtions"
+            required
+            multiple
+          >
+            <option :key="drug" :value="drug" v-for="drug in drugList">
+              {{ drug }}
+            </option>
+          </select>
         </span>
       </form>
     </div>
@@ -143,7 +168,7 @@ export default {
     justify-content: space-between
     align-items: center
 
-  input, textarea
+  input, textarea, select
     border: 2px solid $base-color-3
     border-radius: 0.25rem
     outline: 2px solid transparent
@@ -159,12 +184,17 @@ export default {
     resize: none
     min-height: 150px
 
-  input, textarea
+  input, textarea, select
     width: 100%
     @media screen and (min-width: $breakpoint-md)
-      max-width: unset
       width: 250px
 
+  select
+    option
+      margin: 0.5rem 0
+      white-space: normal
+      overflow-wrap: break-word
+      transition: background-color 150ms ease-out
 .form-actions
   width: 100%
   display: flex
