@@ -4,74 +4,51 @@ import { computed } from 'vue'
 const props = withDefaults(
   defineProps<{
     to?: string
-    color?: 'primary' | 'destructive'
+    color?: 'primary' | 'destructive' | 'transparent'
     disabled?: boolean
     icon?: boolean
+    variant?: 'elevated' | 'flat' | 'outlined' | 'tonal' | 'text' | 'plain'
+    size?: 'x-small' | 'small' | 'large' | 'x-large'
+    elevation?: '4' | '8' | '12' | '16' | '20' | '24'
+    block?: boolean
   }>(),
   {
     color: 'primary',
     disabled: false,
-    icon: false
+    icon: false,
+    variant: 'elevated'
   }
 )
 
 const btnClasses = computed(() => ({
-  primary: props.color === 'primary',
-  destructive: props.color === 'destructive',
-  disabled: props.disabled,
-  icon: props.icon
+  'bg-teal-darken-3': props.color === 'primary',
+  'bg-pink-darken-3': props.color === 'destructive',
+  'bg-grey-darken-3': props.disabled
 }))
 </script>
 
 <template>
   <router-link v-if="props.to" :to="props.to">
-    <button class="base" :class="btnClasses">
-      <slot />
-    </button>
+    <v-btn
+      :class="btnClasses"
+      :readonly="props.disabled"
+      :variant="props.variant"
+      :size="props.size"
+      :elevation="props.elevation"
+      :block="props.block"
+      ><slot
+    /></v-btn>
   </router-link>
 
-  <button v-else class="base" :class="btnClasses">
+  <v-btn
+    v-else
+    :class="btnClasses"
+    :readonly="props.disabled"
+    :variant="props.variant"
+    :size="props.size"
+    :elevation="props.elevation"
+    :block="props.block"
+  >
     <slot />
-  </button>
+  </v-btn>
 </template>
-
-<style lang="sass" scoped>
-.base
-  cursor: pointer
-  padding: 0.6rem 1.15rem
-  border-radius: 0.25rem
-  transition: all 150ms ease-out
-
-.base > a
-  text-decoration: none
-  color: inherit
-
-.primary
-  color: $base-color-1
-  background-color: $base-color-3
-
-  &:hover
-    color: $base-color-4
-    background-color: $base-color-2
-
-.destructive
-    color: $base-color-1
-    background-color: $base-color-destructive
-
-    &:hover
-      color: $base-color-1
-      background-color: $base-color-destructive-2
-
-.disabled
-  color: $base-color-1
-  background-color: $base-color-4-dimmed
-  cursor: not-allowed
-
-  &:hover
-    color: $base-color-1
-    background-color: $base-color-4-dimmed
-
-.icon
-  border-radius: 100%
-  padding: 0.4rem 0.75rem
-</style>

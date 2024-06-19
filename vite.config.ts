@@ -16,7 +16,6 @@ export default defineConfig({
     preprocessorOptions: {
       sass: {
         additionalData: `
-          @import "@/assets/styles/_normalize.sass"
           @import "@/assets/styles/_variables.sass"
         `
       }
