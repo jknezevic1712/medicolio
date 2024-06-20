@@ -9,14 +9,15 @@ const props = withDefaults(
     icon?: boolean
     variant?: 'elevated' | 'flat' | 'outlined' | 'tonal' | 'text' | 'plain'
     size?: 'x-small' | 'small' | 'large' | 'x-large'
-    elevation?: '4' | '8' | '12' | '16' | '20' | '24'
+    elevation?: '0' | '4' | '8' | '12' | '16' | '20' | '24'
     block?: boolean
   }>(),
   {
     color: 'primary',
     disabled: false,
     icon: false,
-    variant: 'elevated'
+    variant: 'elevated',
+    elevation: '4'
   }
 )
 

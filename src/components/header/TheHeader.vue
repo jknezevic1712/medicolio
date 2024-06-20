@@ -19,18 +19,18 @@ function handleLogout() {
 <template>
   <header class="header">
     <h2 class="header-title">
-      <base-button to="/" variant="plain" color="transparent" size="x-large">
+      <base-button to="/" variant="plain" color="transparent" size="x-large" elevation="0">
         Medicolio<library-title />
       </base-button>
     </h2>
     <nav class="nav">
       <template v-if="userExists">
-        <base-button to="/" elevation="4">Patients</base-button>
-        <base-button to="/doctor/1" elevation="4">Profile</base-button>
-        <base-button color="destructive" elevation="4" @click="handleLogout">Logout</base-button>
+        <base-button to="/">Patients</base-button>
+        <base-button to="/doctor/1">Profile</base-button>
+        <base-button color="destructive" @click="handleLogout">Logout</base-button>
       </template>
 
-      <base-button v-else to="/auth" elevation="4">Register</base-button>
+      <base-button v-else to="/auth">Register</base-button>
     </nav>
   </header>
 </template>
